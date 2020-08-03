@@ -1,38 +1,37 @@
-import kotlin.collections.ArrayList
-
 fun main(args: Array<String>) {
     var stringListM: List<String> = listOf<String>()
     var stringListofListd: List<List<String>> = listOf<List<String>>()
-    do {
+    do { //do-while para menú
         println(makeRepice())
-        var opcion = leerOpciones()
-        when (opcion) {
+        var opcion = leerOpciones() //llamado al método para leer las opciones
+        when (opcion) { //Seleccion de la opcion para el menú
             1 -> stringListofListd = opcionUno(stringListM,stringListofListd)
             2 -> opcionDos(stringListofListd)
             3 -> println("Salir")
             else -> println("Opcion Incorrecta")
         }
-    } while (!opcion.equals(3))
+    } while (!opcion.equals(3)) //do-while para menu
 }
 
-fun makeRepice(): String {
+fun makeRepice(): String { //Regresa un string del menú principal
     return """Selecciona la opción deseada
     1. Hacer una receta
     2. Ver mis recetas
     3. Salir""".trimIndent()
 }
 
-fun leerOpciones(): Int {
+fun leerOpciones(): Int { //Método para leer las opciones ingresadas del teclado con excepción marcada
     var response: String? = readLine()
-    if (response.isNullOrEmpty()) response = "0"
-    return response.toInt()
+    if (response.isNullOrEmpty()) return 0 else return response.toInt()
 }
 
-fun agregarArray(index: Int, insumos: List<String>): String {
+fun agregarArray(index: Int, insumos: List<String>): String { //Método que ayuda a agregar al array de ingredientes
     println(insumos.get(index))
     return insumos.get(index)
 }
+// Método para la opcion de eleccion de ingredientes y de ingreso a las lista general de recetas
 fun opcionUno( stringListMParam : List<String>, stringListofListdParam: List<List<String>>) : List<List<String>>{
+
     val insumos: List<String> = listOf<String>("Agua", "Leche", "Carnes", "Verduras", "Frutas",
             "Cereal", "Huevos", "Aceite")
     var stringListM = stringListMParam
@@ -65,7 +64,7 @@ fun opcionUno( stringListMParam : List<String>, stringListofListdParam: List<Lis
     } while (!optionIng.equals(9))
     return stringListofListd
 }
-
+//Método para la impresión de recetas guardadas
 fun opcionDos(stringListofListd : List<List<String>>){
     if (stringListofListd.isEmpty()) println("No hay recetas") else {
         stringListofListd.forEachIndexed { index, list ->
